@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Histogram</title>
+</head>
+<body>
+<svg id="svg01" width=800 height=600>
+    <!--<text x="0" y="20" fill="red">asfc</text>-->
+</svg>
+<script>
+    var w = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+
+    var h = window.innerHeight
+        || document.documentElement.clientHeight
+        || document.body.clientHeight;
+    w=w*0.98
+    h=h*0.98
+    var svg = document.getElementById("svg01");
+    svg.setAttribute("width",w);
+    svg.setAttribute("height",h);
+    var rec = new Array();
+    var txt = new Array();
+    for(var i = 0; i < 10; i++) {
+        rec[i] = document.createElement("rect");
+        txt[i]=document.createElement("text");
+        svg.appendChild(rec[i]);
+        svg.appendChild(txt[i]);
+        var rec_h=Math.floor(Math.random()*255)
+        var rec_r=Math.floor(Math.random()*255)
+        var rec_g=Math.floor(Math.random()*255)
+        txt[i].outerHTML="<text x="+((w/10*i)+(((w/10)-5)/2))+" y="+(600-rec_h)+" fill='black'>"+(rec_h)+"</text>"
+        rec[i].outerHTML="<rect x="+(w/10)*i+" y="+(600-rec_h)+" width="+(w/10-8)+" height="+rec_h+" fill='rgb("+rec_r+","+rec_g+","+rec_h+")'>";
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Histogram</title>
+</head>
+<body>
+<svg id="svg01" width="800" height="600">
+    <!--<text x="0" y="20" fill="red">asfc</text>-->
+</svg>
+<script>
+    var w = 800;
+    var h = 600;
+
+    var svg = document.getElementById("svg01");
+
+    // 添加轴线和刻度标签
+    var xAxis = document.createElement("line");
+    xAxis.setAttribute("x1", 50);
+    xAxis.setAttribute("y1", h - 50);
+    xAxis.setAttribute("x2", w - 50);
+    xAxis.setAttribute("y2", h - 50);
+    xAxis.setAttribute("stroke", "black");
+    svg.appendChild(xAxis);
+
+    var yAxis = document.createElement("line");
+    yAxis.setAttribute("x1", 50);
+    yAxis.setAttribute("y1", 50);
+    yAxis.setAttribute("x2", 50);
+    yAxis.setAttribute("y2", h - 50);
+    yAxis.setAttribute("stroke", "black");
+    svg.appendChild(yAxis);
+    var txt = new Array();
+    var rec = new Array();
+
+    for(var i = 0; i < 10; i++) {
+        rec[i] = document.createElement("rect");
+        txt[i] = document.createElement("text");
+
+        var rec_h = Math.floor(Math.random() * (h - 100));
+        var rec_r = Math.floor(Math.random() * 255);
+        var rec_g = Math.floor(Math.random() * 255);
+
+        // 添加动画效果
+        rec[i].setAttribute("x", 60 + (w / 10) * i);
+        rec[i].setAttribute("y", h - rec_h - 50);
+        rec[i].setAttribute("width", (w / 10 - 12));
+        rec[i].setAttribute("height", rec_h);
+        rec[i].setAttribute("fill", "rgb(" + rec_r + "," + rec_g + "," + rec_h + ")");
+        rec[i].style.transition = "height 1s";
+
+        // 调整间距和比例
+        txt[i].setAttribute("x", 60 + (w / 10 * i) + (((w / 10) - 12) / 2));
+        txt[i].setAttribute("y", h - rec_h - 55);
+        txt[i].setAttribute("fill", "black");
+        txt[i].textContent = rec_h;
+
+        svg.appendChild(rec[i]);
+        svg.appendChild(txt[i]);
+        txt[i].outerHTML="<text x="+((w/10*i)+(((w/10)-5)/2))+" y="+(600-rec_h)+" fill='black'>"+(rec_h)+"</text>"
+        rec[i].outerHTML="<rect x="+(w/10)*i+" y="+(600-rec_h)+" width="+(w/10-8)+" height="+rec_h+" fill='rgb("+rec_r+","+rec_g+","+rec_h+")'>";
+    }
+</script>
+</body>
+</html>
